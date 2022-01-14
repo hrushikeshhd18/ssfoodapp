@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "787490147081",
+    "project_id": "hungry-725e8",
+    "storage_bucket": "hungry-725e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787490147081:android:16dfdaee0b1e0280f961d8",
+        "android_client_info": {
+          "package_name": "com.hdgroup.ssfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787490147081-sj08414tiakbp9vje98p8v885ckivq9s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATDPmOfkNoxcZ7UMHOXY7ziJ8NQMG8XEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787490147081-sj08414tiakbp9vje98p8v885ckivq9s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

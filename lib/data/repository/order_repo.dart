@@ -1,0 +1,60 @@
+import 'package:efood_multivendor/data/api/api_client.dart';
+import 'package:efood_multivendor/data/model/body/place_order_body.dart';
+import 'package:efood_multivendor/util/app_constants.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/response/response.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class OrderRepo {
+  final ApiClient apiClient;
+  final SharedPreferences sharedPreferences;
+  OrderRepo({@required this.apiClient, @required this.sharedPreferences});
+
+  Future<Response> getOrderList() async {
+    return await apiClient.getData(AppConstants.ORDER_LIST_URI);
+  }
+
+  Future<Response> getOrderDetails(String orderID) async {
+    return await apiClient.getData('${AppConstants.ORDER_DETAILS_URI}$orderID');
+  }
+
+  Future<Response> cancelOrder(String orderID) async {
+    return await apiClient.postData(AppConstants.ORDER_CANCEL_URI, {'_method': 'put', 'order_id': orderID});
+  }
+
+  Future<Response> trackOrder(String orderID) async {
+    return await apiClient.getData('${AppConstants.TRACK_URI}$orderID');
+  }
+
+  Future<Response> placeOrder(PlaceOrderBody orderBody) async {
+    return await apiClient.postData(AppConstants.PLACE_ORDER_URI, orderBody.toJson());
+  }
+
+  Future<Response> getDeliveryManData(String orderID) async {
+    return await apiClient.getData('${AppConstants.LAST_LOCATION_URI}$orderID');
+  }
+
+  Future<Response> switchToCOD(String orderID) async {
+    return await apiClient.postData(AppConstants.COD_SWITCH_URL, {'_method': 'put', 'order_id': orderID});
+  }
+
+  Future<Response> getDistanceInMeter(LatLng originLatLng, LatLng destinationLatLng) async {
+    return await apiClient.getData('${AppConstants.DISTANCE_MATRIX_URI}'
+        '?origin_lat=${originLatLng.latitude}&origin_lng=${originLatLng.longitude}'
+        '&destination_lat=${destinationLatLng.latitude}&destination_lng=${destinationLatLng.longitude}');
+    /*Http.Response res;
+    try{
+      res = await Http.get(
+        Uri.parse('${AppConstants.DISTANCE_MATRIX_URI}'
+            'origins=${originLatLng.latitude},${originLatLng.longitude}'
+            '&destinations=${destinationLatLng.latitude},${destinationLatLng.longitude}&key=${AppConstants.MAP_API_KEY}'),
+      );
+    }catch(e) {
+      print('---------${e.toString()}');
+    }
+    return Response(statusCode: res.statusCode, statusText: res.reasonPhrase, body: res.body);*/
+  }
+
+}

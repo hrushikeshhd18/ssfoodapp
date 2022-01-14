@@ -1,6 +1,6 @@
 # A Flutter App for SSfood 
 
-.img {
+img {
   display: block;
   margin-left: auto;
   margin-right: auto;
